@@ -4,6 +4,8 @@ import MoviesList from './components/MoviesList';
 import AddMovie from './components/AddMovie';
 import './App.css';
 
+// firebase API : https://react-http-a9534-default-rtdb.firebaseio.com/movie.json
+
 function App() {
   const [movies, setMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -39,8 +41,15 @@ function App() {
     fetchMoviesHandler();
   }, [fetchMoviesHandler]);
 
-  function addMovieHandler(movie) {
-    console.log(movie);
+  async function addMovieHandler(movie) {
+    const response = await fetch(
+      'https://react-http-a9534-default-rtdb.firebaseio.com/movie.json',
+      {
+        method: 'POST',
+        body: JSON.stringify(movie),
+      }
+    );
+    const json = await response.json();
   }
 
   let content = <p>Found no movies.</p>;
