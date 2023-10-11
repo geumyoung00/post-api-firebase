@@ -54,7 +54,8 @@ function App() {
         'https://react-http-a9534-default-rtdb.firebaseio.com/movie.json'
       );
       console.log('response : ', response);
-      if (response.ok) {
+
+      if (response.statusText !== 'OK') {
         throw new Error('Something went wrong!');
       }
 
@@ -104,9 +105,10 @@ function App() {
 
   async function addMovieHandler(movie) {
     axios
-      .post('https://react-http-a9534-default-rtdb.firebaseio.com/movie.json', {
-        movie,
-      })
+      .post(
+        'https://react-http-a9534-default-rtdb.firebaseio.com/movie.json',
+        movie
+      )
       .then((res) => {
         console.log(res);
         console.log(res.data);
